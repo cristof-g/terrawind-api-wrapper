@@ -85,7 +85,7 @@ class Travel
     /**
      * Get Countries
      *
-     * @return array
+     * @return object
      */
     public function getCountries()
     {
