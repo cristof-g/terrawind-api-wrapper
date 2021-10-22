@@ -64,7 +64,7 @@ class Travel
      * Add New Voucher
      *
      * @param array $vauchers | Passengers Data
-     * @return array
+     * @return object
      */
     public function addVouchers(array $vauchers)
     {
@@ -75,7 +75,7 @@ class Travel
      * Edit Voucher
      *
      * @param array $data
-     * @return array
+     * @return object
      */
     public function editVoucher(array $data)
     {
@@ -99,7 +99,7 @@ class Travel
      * Product Id
      *
      * @param integer $productId
-     * @return array
+     * @return object
      */
     public function getCoverages(int $productId)
     {
@@ -113,7 +113,7 @@ class Travel
     /**
      * Get Currencies
      *
-     * @return array
+     * @return object
      */
     public function getCurrencies()
     {
@@ -125,7 +125,7 @@ class Travel
     /**
      * Get Documents Types
      *
-     * @return array
+     * @return object
      */
     public function getDocumentTypes()
     {
@@ -137,7 +137,7 @@ class Travel
     /**
      * Get Regions
      *
-     * @return array
+     * @return object
      */
     public function getRegions()
     {
@@ -150,7 +150,7 @@ class Travel
      * Get Terrawind products
      *
      * @param string $language
-     * @return array
+     * @return object
      */
     public function getProducts()
     {
@@ -164,7 +164,7 @@ class Travel
      * Get Product ID by product code
      *
      * @param string $productCode
-     * @return array
+     * @return object
      */
     public function getProductId(string $productCode)
     {
@@ -179,7 +179,7 @@ class Travel
      * Get Tariffs of specific product
      *
      * @param integer $productId
-     * @return array
+     * @return object
      */
     public function getTariffs(int $productId)
     {
@@ -193,7 +193,7 @@ class Travel
      * Get Voucher by voucher number
      *
      * @param string $voucherNumber
-     * @return array
+     * @return object
      */
     public function getVoucher(string $voucherNumber)
     {
@@ -212,7 +212,7 @@ class Travel
      */
     public function getVoucherLink(string $voucherNumber, string $voucherKey)
     {
-        if (!empty($voucherNumber) && !empty($voucherNumber)) {
+        if (!empty($voucherNumber) && !empty($voucherKey)) {
             return [
                 'voucher_link'   => $this->getURI() . '/voucher.php?voucher_number=' . $voucherNumber . '&voucher_key=' . $voucherKey . '&change_lang=' . $this->lang,
                 'voucher_status' => 'OK',
@@ -231,7 +231,7 @@ class Travel
      * @param integer $passengers
      * @param mixed $dateFrom (dataTime/String)
      * @param mixed $dateTo (DataTime/String)
-     * @return array
+     * @return object
      */
     public function getVoucherPrice(int $productId, int $passengers, $dateFrom, $dateTo)
     {
@@ -249,7 +249,7 @@ class Travel
      * Get Voucher Status
      *
      * @param array $data
-     * @return array
+     * @return object
      */
     public function getVoucherStatus(array $data)
     {
@@ -261,7 +261,7 @@ class Travel
      *
      * @param string $voucherNumber
      * @param string $comments
-     * @return array
+     * @return object
      */
     public function requireVoucherAnnulation(string $voucherNumber, string $comments = '')
     {
@@ -276,7 +276,7 @@ class Travel
      * Check Voucher
      *
      * @param array $data
-     * @return array
+     * @return object
      */
     protected function checkVoucher(array $data)
     {
@@ -290,7 +290,7 @@ class Travel
      *
      * @param array $data
      * @param string $params Additional params to URL
-     * @return array
+     * @return object
      */
     protected function sendRequest(array $data, string $params = '')
     {
