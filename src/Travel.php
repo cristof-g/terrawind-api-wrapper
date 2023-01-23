@@ -7,6 +7,8 @@ class Travel
     const BASE_URI_SANDBOX = 'https://emision.sandbox-setw.info';
 
     protected $client;
+    protected $user;
+    protected $password;
     protected $lang   = 'en';
     protected $method = 'GET';
     protected $sandbox;
@@ -253,7 +255,7 @@ class Travel
      */
     public function getVoucherStatus(array $data)
     {
-        return $this->checkVoucher($data, '?action=edit_voucher');
+        return $this->checkVoucher($data);
     }
 
     /**
@@ -280,7 +282,10 @@ class Travel
      */
     protected function checkVoucher(array $data)
     {
-        $data = array_merge(['action' => 'check_voucher'], $data);
+        $data = array_merge([
+            'action' => 'check_voucher', 
+            'language' => $this->lang
+        ], $data);
 
         return $this->sendRequest($data);
     }
@@ -323,7 +328,13 @@ class Travel
         return unserialize(serialize(json_decode(json_encode((array) $xml, 1))));
     }
 
-    protected function hasError($data)
+    /**
+     * has Error
+     *
+     * @param mixed $data
+     * @return boolean
+     */
+    protected function hasError($data): bool
     {
         return isset($data->error);
     }
