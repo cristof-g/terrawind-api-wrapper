@@ -119,13 +119,13 @@ final class TravelTest extends TestCase
         $dateTo   = $now->add(10, 'day')->format('d/m/Y');
 
         $data = [
-            'voucher_date_from'              => '10/10/2020',
-            'voucher_date_to'                => '20/10/2020',
+            'voucher_date_from'              => $dateFrom,
+            'voucher_date_to'                => $dateTo,
             'voucher_int_ref'                => '',
             'voucher_product_id'             => 5869,
             'country_id'                     => 201,
             'passenger_document_type_id'     => 2,
-            'passenger_document_number'      => 'xxxxxxxxx',
+            'passenger_document_number'      => 'xxxxxxx',
             'passenger_birth_date'           => '01/01/1990',
             'passenger_gender'               => 'M',
             'passenger_first_name'           => $faker->firstNameMale,
@@ -143,6 +143,7 @@ final class TravelTest extends TestCase
         ];
 
         $this->travel->setMethod('POST');
+        $this->travel->setLang('en');
         $voucher = $this->travel->getVoucherStatus($data);
 
         $this->assertNotEmpty($voucher);
