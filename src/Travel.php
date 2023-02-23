@@ -3,8 +3,13 @@ namespace TW;
 
 class Travel
 {
-    const BASE_URI         = 'https://emision.setw.net';
-    const BASE_URI_SANDBOX = 'https://emision.sandbox-setw.info';
+    const BASE_URI         = "https://emision.setw.net";
+    const BASE_URI_SANDBOX = "https://sandbox.setw.net";
+
+    const API_PATH         = "/api/";
+    const API_SANDBOX_PATH = "/emision/api/";
+
+    const API_VERSION = "v2";
 
     protected $client;
     protected $user;
@@ -28,16 +33,31 @@ class Travel
      * @param [type] $sandbox
      * @return void
      */
-    protected function initClientConnection()
+    protected function initClientConnection(): void
     {
         $uri = $this->getURI();
 
         $this->client = new \GuzzleHttp\Client(['base_uri' => $uri]);
     }
 
-    protected function getURI()
+    /**
+     * Get URI
+     *
+     * @return string
+     */
+    protected function getURI(): string
     {
         return $this->sandbox ? self::BASE_URI_SANDBOX : self::BASE_URI;
+    }
+
+    /**
+     * Get API path
+     *
+     * @return string
+     */
+    protected function getApiPath(): string
+    {
+        return $this->sandbox ? self::API_SANDBOX_PATH : self::API_PATH;
     }
 
     /**
@@ -283,8 +303,8 @@ class Travel
     protected function checkVoucher(array $data)
     {
         $data = array_merge([
-            'action' => 'check_voucher', 
-            'language' => $this->lang
+            'action'   => 'check_voucher',
+            'language' => $this->lang,
         ], $data);
 
         return $this->sendRequest($data);
@@ -300,7 +320,7 @@ class Travel
     protected function sendRequest(array $data, string $params = '')
     {
         $formData = ['auth' => [$this->user, $this->password]];
-        $uri      = '/api/' . $params;
+        $uri      = $this->getApiPath() . self::API_VERSION . "/" . $params;
 
         if ($this->method == 'GET') {
             $formData['query'] = $data;
