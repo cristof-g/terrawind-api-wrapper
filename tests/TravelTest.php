@@ -6,12 +6,20 @@ use TW\Travel;
 
 final class TravelTest extends TestCase
 {
+    const PRODUCT_ID = 6742;
+
     protected $travel;
+    protected $isSandbox = true;
 
     public function __construct()
     {
         parent::__construct();
-        $this->travel = new Travel($_ENV['user'], $_ENV['password'], true);
+
+        $this->travel = new Travel(
+            $_ENV['user'],
+            $_ENV['password'],
+            $this->isSandbox
+        );
     }
 
     public function testCanGetCountries(): void
@@ -53,7 +61,7 @@ final class TravelTest extends TestCase
 
     public function testCanGetTariffs()
     {
-        $tariffs = $this->travel->getTariffs(5869);
+        $tariffs = $this->travel->getTariffs(self::PRODUCT_ID);
         $this->assertNotEmpty($tariffs->tariff);
     }
 
@@ -63,7 +71,7 @@ final class TravelTest extends TestCase
         $dateFrom = $now->format('d/m/Y');
         $dateTo   = $now->add(5, 'day')->format('d/m/Y');
 
-        $voucher = $this->travel->getVoucherPrice(5869, 1, $dateFrom, $dateTo);
+        $voucher = $this->travel->getVoucherPrice(self::PRODUCT_ID, 2, $dateFrom, $dateTo, [40, 50]);
 
         $this->assertNotEmpty($voucher);
         $this->assertGreaterThan(0, $voucher->price);
@@ -79,13 +87,13 @@ final class TravelTest extends TestCase
         $data = [
             'vouchers' => [
                 0 => [
-                    'voucher_date_from'              => '10/10/2020',
-                    'voucher_date_to'                => '20/10/2020',
+                    'voucher_date_from'              => $dateFrom,
+                    'voucher_date_to'                => $dateTo,
                     'voucher_int_ref'                => '',
-                    'voucher_product_id'             => 5869,
+                    'voucher_product_id'             => self::PRODUCT_ID,
                     'country_id'                     => 201,
                     'passenger_document_type_id'     => 2,
-                    'passenger_document_number'      => 'xxxxxxxxx',
+                    'passenger_document_number'      => 'geroasd02',
                     'passenger_birth_date'           => '01/01/1990',
                     'passenger_gender'               => 'M',
                     'passenger_first_name'           => $faker->firstNameMale,
@@ -107,8 +115,10 @@ final class TravelTest extends TestCase
         $this->travel->setMethod('POST');
         $voucher = $this->travel->addVouchers($data);
 
+        var_dump($voucher);
+
         $this->assertNotEmpty($voucher);
-        $this->assertNotEmpty($voucher->voucher_number);
+        $this->assertNotEmpty($voucher->voucher->voucher_number);
     }
 
     public function testCanGetVoucherStatus()
@@ -122,7 +132,7 @@ final class TravelTest extends TestCase
             'voucher_date_from'              => $dateFrom,
             'voucher_date_to'                => $dateTo,
             'voucher_int_ref'                => '',
-            'voucher_product_id'             => 5869,
+            'voucher_product_id'             => self::PRODUCT_ID,
             'country_id'                     => 201,
             'passenger_document_type_id'     => 2,
             'passenger_document_number'      => 'xxxxxxx',
@@ -140,6 +150,7 @@ final class TravelTest extends TestCase
             'passenger_emergency_last_name'  => $faker->lastName,
             'passenger_emergency_phone_1'    => $faker->phoneNumber,
             'passenger_emergency_phone_2'    => $faker->phoneNumber,
+            'ccoverages'                     => "",
         ];
 
         $this->travel->setMethod('POST');
@@ -170,5 +181,12 @@ final class TravelTest extends TestCase
         $voucher = $this->travel->getVoucherLink('MEX200424E4B52F', '8733455323BE1DBADB1F');
 
         $this->assertEquals($voucher['voucher_status'], "OK");
+    }
+
+    public function testCanGetUpgradeCoverage()
+    {
+        $voucher = $this->travel->getUpgrades(self::PRODUCT_ID, 30, 40);
+
+        $this->assertNotEmpty($voucher);
     }
 }

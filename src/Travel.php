@@ -255,15 +255,17 @@ class Travel
      * @param mixed $dateTo (DataTime/String)
      * @return object
      */
-    public function getVoucherPrice(int $productId, int $passengers, $dateFrom, $dateTo)
+    public function getVoucherPrice(int $productId, int $passengers, $dateFrom, $dateTo, array $ages, array $ccoverages = [])
     {
         return $this->sendRequest([
-            'action'     => 'get_voucher_price',
-            'language'   => $this->lang,
-            'product_id' => $productId,
-            'passengers' => $passengers,
-            'date_from'  => $dateFrom,
-            'date_to'    => $dateTo,
+            'action'                => 'get_voucher_price',
+            'language'              => $this->lang,
+            'product_id'            => $productId,
+            'passengers'            => $passengers,
+            'date_from'             => $dateFrom,
+            'date_to'               => $dateTo,
+            'passengers_ages'       => $ages,
+            'passengers_ccoverages' => $ccoverages,
         ]);
     }
 
@@ -291,6 +293,24 @@ class Travel
             'action'         => 'require_voucher_annulation',
             'voucher_number' => $voucherNumber,
             'comments'       => $comments,
+        ]);
+    }
+
+    /**
+     * Get Coverage Upgrade
+     *
+     * @param integer $productId
+     * @param integer $tripDays
+     * @param mixed $passengerAge
+     * @return object
+     */
+    public function getUpgrades(int $productId, int $tripDays, $passengerAge = "")
+    {
+        return $this->sendRequest([
+            'action'        => 'get_ccoverages',
+            'product_id'    => $productId,
+            'passenger_age' => $passengerAge,
+            'trip_days'     => $tripDays,
         ]);
     }
 
