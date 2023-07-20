@@ -11,10 +11,7 @@ final class TravelTest extends TestCase
     protected $travel;
     protected $isSandbox = true;
 
-    public function __construct()
-    {
-        parent::__construct();
-
+    protected function initWebService(){
         $this->travel = new Travel(
             $_ENV['user'],
             $_ENV['password'],
@@ -24,6 +21,8 @@ final class TravelTest extends TestCase
 
     public function testCanGetCountries(): void
     {
+        $this->initWebService();
+
         $countries = $this->travel->getCountries();
 
         $this->assertNotEmpty($countries->country);
@@ -31,42 +30,56 @@ final class TravelTest extends TestCase
 
     public function testCanGetCurrencies()
     {
+        $this->initWebService();
+
         $currencies = $this->travel->getCurrencies();
         $this->assertNotEmpty($currencies->currency);
     }
 
     public function testCanGetDocumentsTypes()
     {
+        $this->initWebService();
+
         $documents = $this->travel->getDocumentTypes();
         $this->assertNotEmpty($documents->document_type);
     }
 
     public function testCanGetRegions()
     {
+        $this->initWebService();
+
         $regions = $this->travel->getRegions();
         $this->assertNotEmpty($regions->region);
     }
 
     public function testCanGetProducts()
     {
+        $this->initWebService();
+
         $products = $this->travel->getProducts();
         $this->assertNotEmpty($products->product);
     }
 
     public function testCanGetProductId()
     {
+        $this->initWebService();
+
         $products = $this->travel->getProductId('IMX-TRADI'); // Product - International
         $this->assertNotEmpty($products->product);
     }
 
     public function testCanGetTariffs()
     {
+        $this->initWebService();
+
         $tariffs = $this->travel->getTariffs(self::PRODUCT_ID);
         $this->assertNotEmpty($tariffs->tariff);
     }
 
     public function testCanGetVoucherPrice()
     {
+        $this->initWebService();
+
         $now      = Carbon::now();
         $dateFrom = $now->format('d/m/Y');
         $dateTo   = $now->add(5, 'day')->format('d/m/Y');
@@ -79,6 +92,8 @@ final class TravelTest extends TestCase
 
     public function testCanAddVoucher()
     {
+        $this->initWebService();
+
         $now      = Carbon::now();
         $faker    = \Faker\Factory::create('es_MX');
         $dateFrom = $now->add(5, 'day')->format('d/m/Y');
@@ -123,6 +138,8 @@ final class TravelTest extends TestCase
 
     public function testCanGetVoucherStatus()
     {
+        $this->initWebService();
+
         $now      = Carbon::now();
         $faker    = \Faker\Factory::create('es_MX');
         $dateFrom = $now->add(5, 'day')->format('d/m/Y');
@@ -163,6 +180,8 @@ final class TravelTest extends TestCase
 
     public function testCanGetVoucher()
     {
+        $this->initWebService();
+
         $voucher = $this->travel->getVoucher('MEX200423C2EAB5');
 
         $this->assertEquals('MEX200423C2EAB5', $voucher->voucher->voucher_number);
@@ -170,6 +189,8 @@ final class TravelTest extends TestCase
 
     public function testCanRequireVoucherAnnulation()
     {
+        $this->initWebService();
+
         $voucher = $this->travel->requireVoucherAnnulation('MEX20042309D008');
 
         $this->assertNotEmpty($voucher);
@@ -178,6 +199,8 @@ final class TravelTest extends TestCase
 
     public function testCanGetVoucherLink()
     {
+        $this->initWebService();
+
         $voucher = $this->travel->getVoucherLink('MEX200424E4B52F', '8733455323BE1DBADB1F');
 
         $this->assertEquals($voucher['voucher_status'], "OK");
@@ -185,6 +208,8 @@ final class TravelTest extends TestCase
 
     public function testCanGetUpgradeCoverage()
     {
+        $this->initWebService();
+
         $voucher = $this->travel->getUpgrades(self::PRODUCT_ID, 30, 40);
 
         $this->assertNotEmpty($voucher);
