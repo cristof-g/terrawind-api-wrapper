@@ -8,8 +8,8 @@
     }],
     "autoload": {
         "psr-4" : {
-            "TW\\" : "src/",
-            "TW\\Tests\\" : "tests/"
+            "App\\" : "src/",
+            "App\\Tests\\" : "tests/"
         }
     },
     "require": {
@@ -18,7 +18,11 @@
         "fakerphp/faker": "^1.23"
     },
     "require-dev": {
-        "phpunit/phpunit": "^10.0",
-        "nesbot/carbon": "^2.25"
+        "pestphp/pest": "^2.34"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
     }
 }
