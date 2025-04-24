@@ -1,9 +1,9 @@
 <?php
-namespace App\Api\Voucher;
+namespace SETW\Api\Voucher;
 
-use App\Api\Client;
-use App\Enums\Action;
-use App\Helper;
+use SETW\Api\Client;
+use SETW\Enums\Action;
+use SETW\Helper;
 
 class Voucher extends Client
 {

@@ -1,5 +1,5 @@
 <?php
-namespace App\Contracts;
+namespace SETW\Contracts;
 
 interface EmisionInterface
 {

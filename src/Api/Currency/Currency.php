@@ -1,9 +1,9 @@
 <?php
-namespace App\Api\Currency;
+namespace SETW\Api\Currency;
 
-use App\Api\Client;
-use App\Contracts\EmisionInterface;
-use App\Enums\Action;
+use SETW\Api\Client;
+use SETW\Contracts\EmisionInterface;
+use SETW\Enums\Action;
 
 class Currency extends Client implements EmisionInterface
 {

@@ -1,9 +1,9 @@
 <?php
-namespace App\Api\Country;
+namespace SETW\Api\Country;
 
-use App\Api\Client;
-use App\Contracts\EmisionInterface;
-use App\Enums\Action;
+use SETW\Api\Client;
+use SETW\Contracts\EmisionInterface;
+use SETW\Enums\Action;
 
 class Country extends Client implements EmisionInterface
 {

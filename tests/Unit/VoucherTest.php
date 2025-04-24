@@ -1,13 +1,13 @@
 <?php
 
-use App\Api\Voucher\Voucher;
-use App\Helper;
+use SETW\Api\Voucher\Voucher;
+use SETW\Helper;
 
 $faker = Faker\Factory::create();
 
 $voucher = new Voucher(
     $_ENV['user'],
-    $_ENV['password']
+    $_ENV['password'],
 );
 
 $vocuherData = [

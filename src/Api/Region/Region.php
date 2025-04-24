@@ -1,9 +1,9 @@
 <?php
-namespace App\Api\Region;
+namespace SETW\Api\Region;
 
-use App\Api\Client;
-use App\Contracts\EmisionInterface;
-use App\Enums\Action;
+use SETW\Api\Client;
+use SETW\Contracts\EmisionInterface;
+use SETW\Enums\Action;
 
 class Region extends Client implements EmisionInterface
 {

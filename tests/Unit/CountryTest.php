@@ -1,6 +1,6 @@
 <?php
 
-use App\Api\Country\Country;
+use SETW\Api\Country\Country;
 
 test('Can get countries', function () {
     $country = new Country(

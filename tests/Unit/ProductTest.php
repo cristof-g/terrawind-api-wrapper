@@ -1,6 +1,6 @@
 <?php
 
-use App\Api\Product\Product;
+use SETW\Api\Product\Product;
 
 test('Can get products', function(){
     $product = new Product(

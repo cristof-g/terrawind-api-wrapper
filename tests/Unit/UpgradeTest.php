@@ -1,6 +1,6 @@
 <?php
 
-use App\Api\Upgrade\Upgrade;
+use SETW\Api\Upgrade\Upgrade;
 
 test('can get upgrades', function () {
     $upgrade = new Upgrade(

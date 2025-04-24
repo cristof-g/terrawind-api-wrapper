@@ -1,6 +1,6 @@
 <?php
 
-use App\Api\DocumentType\DocumentType;
+use SETW\Api\DocumentType\DocumentType;
 
 test('Can get documents types', function(){
     $documentType = new DocumentType(

@@ -1,6 +1,6 @@
 <?php
 
-use App\Api\Tariff\Tariff;
+use SETW\Api\Tariff\Tariff;
 
 test('can get tariffs by product id', function () {
     $tariff = new Tariff(

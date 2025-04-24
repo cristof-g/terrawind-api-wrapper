@@ -1,6 +1,6 @@
 <?php
 
-use App\Api\Currency\Currency;
+use SETW\Api\Currency\Currency;
 
 test('Can get currencies', function(){
     $currency = new Currency(

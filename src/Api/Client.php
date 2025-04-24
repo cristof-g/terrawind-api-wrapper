@@ -1,7 +1,7 @@
 <?php
-namespace App\Api;
+namespace SETW\Api;
 
-use App\Helper;
+use SETW\Helper;
 
 class Client
 {

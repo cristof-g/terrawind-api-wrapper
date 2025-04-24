@@ -1,5 +1,5 @@
 <?php
-namespace App\Enums;
+namespace SETW\Enums;
 
 enum Action: string {
     case ADD_VOUCHERS          = "add_vouchers";

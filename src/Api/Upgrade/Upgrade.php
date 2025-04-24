@@ -1,8 +1,8 @@
 <?php
-namespace App\Api\Upgrade;
+namespace SETW\Api\Upgrade;
 
-use App\Api\Client;
-use App\Enums\Action;
+use SETW\Api\Client;
+use SETW\Enums\Action;
 
 class Upgrade extends Client
 {

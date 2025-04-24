@@ -8,8 +8,8 @@
     }],
     "autoload": {
         "psr-4" : {
-            "App\\" : "src/",
-            "App\\Tests\\" : "tests/"
+            "SETW\\" : "src/",
+            "SETW\\Tests\\" : "tests/"
         }
     },
     "require": {

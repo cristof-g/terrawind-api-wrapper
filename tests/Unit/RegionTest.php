@@ -1,6 +1,6 @@
 <?php
 
-use App\Api\Region\Region;
+use SETW\Api\Region\Region;
 
 test('can get regions', function () {
     $region = new Region(
